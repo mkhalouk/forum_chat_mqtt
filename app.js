@@ -15,6 +15,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 //routes
+const homeRouter = require("./routes/home");
 const subscriberRouter = require("./routes/subscriber");
 const publisherRouter = require("./routes/publisher");
 
@@ -22,6 +23,7 @@ app.get("/", (req, res) => {
   res.send("Bienvenue sur le forum de discussions!");
 });
 
+app.use("/home", homeRouter);
 app.use("/subscriber", subscriberRouter);
 app.use("/publisher", publisherRouter);
 
