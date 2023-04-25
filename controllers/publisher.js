@@ -19,8 +19,8 @@ exports.publishMQTTMessage = async function (req, res) {
     const topic = req.body.topic;
     const message = req.body.message;
 
-    console.log(`Request Topic :: ${topic}`);
-    console.log(`Request Message :: ${message}`);
+    // console.log(`Request Topic :: ${topic}`);
+    // console.log(`Request Message :: ${message}`);
 
     mqttClient.publish(topic, message, {});
     res

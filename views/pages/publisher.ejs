@@ -15,7 +15,9 @@
       <ul class="wrapper">
         <li class="form-row">
           <label for="topic">Topic</label>
-          <input type="text" id="topic" />
+          <select id="topic" name="topic">
+            <option value="">Select a user</option>
+          </select>
         </li>
         <li class="form-row">
           <label for="message">Message</label>
@@ -27,5 +29,18 @@
       </ul>
     </form>
     <script src="/assets/publisher/publisher.js"></script>
+    <script>
+      window.addEventListener("load", async (event) => {
+        const allUsers = await fetch(`/getAllUsers`);
+        const users = await allUsers.json();
+        const topicSelect = document.getElementById("topic");
+        users.forEach((user) => {
+          const option = document.createElement("option");
+          option.value = user.topic_token;
+          option.text = user.username;
+          topicSelect.add(option);
+        });
+      });
+    </script>
   </body>
 </html>

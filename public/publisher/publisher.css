@@ -27,12 +27,14 @@
   font-size: 1.2em;
   font-weight: bold;
 }
-.form-row > input {
+.form-row > input,
+.form-row > select {
   flex: 2;
 }
 
 .form-row > input,
-.form-row > button {
+.form-row > button,
+.form-row > select {
   padding: 1em;
   margin: 10px 0;
   box-shadow: 0 0 15px 4px rgba(0, 0, 0, 0.06);

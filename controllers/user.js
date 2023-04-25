@@ -55,6 +55,14 @@ async function login(req, res, next) {
   }
 }
 
+async function getAllUsers(req, res, next) {
+  try {
+    const users = await User.find({});
+    res.json(users);
+  } catch (error) {
+    next(error);
+  }
+}
 
 async function getUserTopic(username) {
   const user = await User.findOne({ username });
@@ -79,5 +87,5 @@ module.exports = {
   signUp,
   checkUser,
   login,
-  // sendMessage
+  getAllUsers
 };

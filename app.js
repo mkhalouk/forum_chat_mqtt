@@ -59,12 +59,17 @@ app.get('/getSessionData', function(req, res) {
   res.json(req.session);
 });
 
+app.get('/logout', function(req, res) {
+  req.session.destroy();
+  res.render("pages/home");
+});
+
 app.get("/", (req, res) => {
-  console.log(req.session.user)
   res.render("pages/home");
 });
 
 app.get('/checkUser', userController.checkUser);
+app.get('/getAllUsers', userController.getAllUsers);
 
 app.use("/home", homeRouter);
 app.use("/login", loginRouter);
