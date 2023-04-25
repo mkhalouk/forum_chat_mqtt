@@ -1,9 +1,10 @@
 var publishForm = document.getElementById("publishForm");
+let clientId;
 
 publishForm.addEventListener("submit", function (e) {
   e.preventDefault();
   var topic = document.getElementById("topic").value;
-  var message = document.getElementById("messagePub").value;
+  var message = clientId + ' : ' + document.getElementById("messagePub").value;
   document.getElementById("messagePub").value = '';
   fetch("/publisher", {
     method: "POST",
@@ -26,13 +27,25 @@ publishForm.addEventListener("submit", function (e) {
 
 let mqttClient;
 
-window.addEventListener("load", (event) => {
-  connectToBroker();
+window.addEventListener("load", async (event) => {
+  const sessionData = await getSessionData();
+  connectToBroker(sessionData);
   subscribeToTopic();
 });
 
-function connectToBroker() {
-  const clientId = "client" + Math.random().toString(36).substring(7);
+async function getSessionData() {
+  const response = await fetch('/getsessiondata');
+  const data = await response.json();
+  return data;
+}
+
+function connectToBroker(sessionData = '') {
+  if(!sessionData.user) {
+    // sessionData.user.username = 'Anonymous';
+    clientId = 'Anonymous-'+ Math.random().toString(36).substring(7);
+  } else {
+    clientId = sessionData.user.username;
+  }
 
   const host = "wss://fce85f7acde44e06b48fc42411abf0e8.s2.eu.hivemq.cloud:8884/mqtt"; // Websocket pour connecter le client à mon broker
 

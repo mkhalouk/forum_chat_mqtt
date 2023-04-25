@@ -55,6 +55,9 @@ const publisherRouter = require("./routes/publisher");
 //   }
 // });
 
+app.get('/getSessionData', function(req, res) {
+  res.json(req.session);
+});
 
 app.get("/", (req, res) => {
   console.log(req.session.user)
