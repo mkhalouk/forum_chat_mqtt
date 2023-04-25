@@ -4,7 +4,7 @@ publishForm.addEventListener("submit", function (e) {
   e.preventDefault();
   var topic = document.getElementById("topic").value;
   var message = document.getElementById("messagePub").value;
-
+  document.getElementById("messagePub").value = '';
   fetch("/publisher", {
     method: "POST",
     body: JSON.stringify({
