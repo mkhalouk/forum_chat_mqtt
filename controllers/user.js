@@ -45,10 +45,10 @@ async function login(req, res, next) {
         req.session.user = user;
         res.redirect('/home');
       } else {
-        res.render('pages/login', { error: 'Incorrect password' });
+        res.render('pages/login', { error: 'Mot de passe incorrecte' });
       }
     } else {
-      res.render('pages/login', { error: 'User not found' });
+      res.render('pages/login', { error: 'Utilisateur inexstistant' });
     }
   } catch (error) {
     next(error);

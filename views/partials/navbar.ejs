@@ -1,12 +1,45 @@
 <section>
   <nav>
     <ul class="menuItems">
-      <li><a href='#' data-item='Home'>Home</a></li>
-      <li><a href='#' data-item='About'>About</a></li>
-      <li><a href='#' data-item='Projects'>Projects</a></li>
-      <li><a href='#' data-item='Blog'>Blog</a></li>
-      <li><a href='#' data-item='Contact'>Contact</a></li>
+      <li><a href="/" data-item="Home">Home</a></li>
+      <li>
+        <a href="/publisher" data-item="Envoyer un message"
+          >Envoyer un message</a
+        >
+      </li>
+      <li>
+        <a href="/subscriber" data-item="Voir les messages"
+          >Voir les messages</a
+        >
+      </li>
+      <li id="listLogin">
+        <a href="/login" data-item="Connexion">Connexion</a>
+      </li>
+      <li id="listLogout">
+        <a href="/logout" data-item="Déconnexion">Déconnexion</a>
+      </li>
+      <li id="listSignup">
+        <a href="/signup" data-item="Inscription">Inscription</a>
+      </li>
     </ul>
   </nav>
-
 </section>
+
+<script>
+  window.addEventListener("load", async (event) => {
+    const sessionData = await getSessionData();
+    if(sessionData.user) {
+      document.getElementById("greeting").textContent += ' - ' + 'Bonjour ' + sessionData.user.username;
+      document.getElementById("listLogin").remove();
+      document.getElementById("listSignup").remove();
+    } else {
+      document.getElementById("listLogout").hidden = true;
+    }
+  });
+
+  async function getSessionData() {
+    const response = await fetch("/getsessiondata");
+    const data = await response.json();
+    return data;
+  }
+</script>

@@ -10,32 +10,7 @@
     <script src="https://unpkg.com/mqtt/dist/mqtt.min.js"></script>
   </head>
   <body>
-    <section>
-      <nav>
-        <ul class="menuItems">
-          <li><a href="/" data-item="Home">Home</a></li>
-          <li>
-            <a href="/publisher" data-item="Envoyer un message"
-              >Envoyer un message</a
-            >
-          </li>
-          <li>
-            <a href="/subscriber" data-item="Voir les messages"
-              >Voir les messages</a
-            >
-          </li>
-          <li id="listLogin">
-            <a href="/login" data-item="Connexion">Connexion</a>
-          </li>
-          <li id="listLogout">
-            <a href="/logout" data-item="Déconnexion">Déconnexion</a>
-          </li>
-          <li id="listSignup">
-            <a href="/signup" data-item="Inscription">Inscription</a>
-          </li>
-        </ul>
-      </nav>
-    </section>
+    <%- include('../partials/navbar.ejs') %>
 
     <h1 id="greeting">Forum Chat</h1>
     <h2>General</h2>
@@ -46,7 +21,7 @@
         <input type="text" id="topic" value="generalTopic" hidden="true" />
       </li>
       <li class="form-row">
-        <label for="messageSub">Chat</label>
+        <label for="messageSub">Discussion</label>
         <textarea
           id="messageSub"
           name="messageSub"
@@ -62,32 +37,14 @@
           <input type="text" id="topic" value="generalTopic" hidden="true" />
         </li>
         <li class="form-row">
-          <label for="messagePub">Write your message</label>
+          <label for="messagePub">Ecrivez votre message</label>
           <input type="text" id="messagePub" />
         </li>
         <li class="form-row">
-          <button type="submit" class="publish">Send</button>
+          <button type="submit" class="publish">Envoyer</button>
         </li>
       </ul>
     </form>
     <script src="/assets/home/home.js"></script>
-    <script>
-      window.addEventListener("load", async (event) => {
-        const sessionData = await getSessionData();
-        if(sessionData.user) {
-          document.getElementById("greeting").textContent += ' - ' + 'Bonjour ' + sessionData.user.username;
-          document.getElementById("listLogin").remove();
-          document.getElementById("listSignup").remove();
-        } else {
-          document.getElementById("listLogout").hidden = true;
-        }
-      });
-
-      async function getSessionData() {
-        const response = await fetch("/getsessiondata");
-        const data = await response.json();
-        return data;
-      }
-    </script>
   </body>
 </html>
