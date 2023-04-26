@@ -2,7 +2,7 @@
   <nav>
     <ul class="menuItems">
       <li><a href="/" data-item="Home">Home</a></li>
-      <li>
+      <li id="listChat">
         <a href="/chat" data-item="Chat privé"
           >Chat privé</a
         >
@@ -30,6 +30,7 @@
       document.getElementById("listSignup").remove();
     } else {
       document.getElementById("listLogout").hidden = true;
+      document.getElementById("listChat").hidden = true;
     }
   });
 
