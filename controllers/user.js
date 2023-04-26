@@ -69,20 +69,6 @@ async function getUserTopic(username) {
   return user ? user.topic_token : null;
 }
 
-// FIXME: This is a temporary fix for a bug in the mqtt library.
-// async function sendMessage(req, res) {
-//   const message = req.body.message;
-//   const recipientUsername = req.body.recipientUsername;
-//   const senderUsername = req.session.user.username;
-//   const recipientTopic = await getUserTopic(recipientUsername);
-//   const senderTopic = await getUserTopic(senderUsername);
-//   if (recipientTopic && senderTopic) {
-//     mqtt.sendMessage(recipientTopic, `${senderUsername}: ${message}`);
-//     mqtt.sendMessage(senderTopic, `${senderUsername}: ${message}`);
-//   }
-//   res.redirect('/chat');
-// }
-
 module.exports = {
   signUp,
   checkUser,

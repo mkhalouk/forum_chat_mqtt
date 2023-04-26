@@ -39,21 +39,6 @@ const loginRouter = require("./routes/login");
 const signupRouter = require("./routes/signup");
 const chatRouter = require("./routes/chat");
 
-// middlewares
-// FIXME: Si pas loggué, redirige vers la page de login
-// app.use(function(req, res, next) {
-//   try {
-//     console.log(req.session.user)
-//     if(req.session.user) {
-//       res.render("pages/home");
-//     } else {
-//       res.render('pages/login');
-//     }
-//   } catch (error) {
-//     next(error);
-//   }
-// });
-
 app.get('/getSessionData', function(req, res) {
   res.json(req.session);
 });
