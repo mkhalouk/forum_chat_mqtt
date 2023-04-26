@@ -26,6 +26,7 @@ publishForm.addEventListener("submit", function (e) {
 
 privateChannelBtn.addEventListener("click", function (e) {
   e.preventDefault();
+  privateChannelBtn.textContent = 'Se déconnecter';
   var inputPrivateChannel = document.getElementById("privateTopicChannel");
   var labelPrivateChannel = document.getElementById("privateChannelLabel");
   if(inputPrivateChannel.hidden) {
@@ -33,6 +34,7 @@ privateChannelBtn.addEventListener("click", function (e) {
     labelPrivateChannel.textContent = '';
     btnPrivateChannel.hidden = false;
   } else {
+    privateChannelBtn.textContent = 'Canal privé';
     inputPrivateChannel.hidden = true;
     labelPrivateChannel.textContent = 'Vous êtes déconnecté du channel privé, vous êtes revenu sur le channel général';
     btnPrivateChannel.hidden = true;
