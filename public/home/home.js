@@ -1,4 +1,6 @@
 var publishForm = document.getElementById("publishForm");
+var privateChannelBtn = document.getElementById("privateChannelBtn");
+var btnPrivateChannel = document.getElementById("joinPrivateChannelBtn");
 let clientId;
 
 publishForm.addEventListener("submit", function (e) {
@@ -20,6 +22,34 @@ publishForm.addEventListener("submit", function (e) {
       return response.json();
     })
     .catch((error) => console.error("Error:", error));
+});
+
+privateChannelBtn.addEventListener("click", function (e) {
+  e.preventDefault();
+  var inputPrivateChannel = document.getElementById("privateTopicChannel");
+  var labelPrivateChannel = document.getElementById("privateChannelLabel");
+  if(inputPrivateChannel.hidden) {
+    inputPrivateChannel.hidden = false;
+    labelPrivateChannel.textContent = '';
+    btnPrivateChannel.hidden = false;
+  } else {
+    inputPrivateChannel.hidden = true;
+    labelPrivateChannel.textContent = 'Vous êtes déconnecté du channel privé, vous êtes revenu sur le channel général';
+    btnPrivateChannel.hidden = true;
+    unsubscribeToTopic();
+    document.querySelector("#topic").value = 'generalTopic';
+    subscribeToTopic();
+    document.getElementById("discussionLabel").textContent = 'Discussion';
+  }
+});
+
+btnPrivateChannel.addEventListener("click", function (e) {
+  e.preventDefault();
+  var inputPrivateChannelTopic = document.getElementById("privateTopicChannel").value;
+  unsubscribeToTopic();
+  document.querySelector("#topic").value = inputPrivateChannelTopic;
+  subscribeToTopic();
+  document.getElementById("discussionLabel").textContent += ' (Vous êtes sur le channel '+ inputPrivateChannelTopic + ')';
 });
 
 let mqttClient;
