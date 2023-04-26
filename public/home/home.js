@@ -6,7 +6,7 @@ publishForm.addEventListener("submit", function (e) {
   var topic = document.getElementById("topic").value;
   var message = clientId + ' : ' + document.getElementById("messagePub").value;
   document.getElementById("messagePub").value = '';
-  fetch("/publisher", {
+  fetch("/chat", {
     method: "POST",
     body: JSON.stringify({
       topic: topic,
@@ -18,9 +18,6 @@ publishForm.addEventListener("submit", function (e) {
   })
     .then(function (response) {
       return response.json();
-    })
-    .then(function (data) {
-      console.log(data);
     })
     .catch((error) => console.error("Error:", error));
 });

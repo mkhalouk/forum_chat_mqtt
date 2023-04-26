@@ -11,7 +11,7 @@ publishForm.addEventListener("submit", async function (e) {
   const sessionData = await getSessionData();
   const sender = sessionData.user.username;
 
-  fetch("/publisher", {
+  fetch("/chat", {
     method: "POST",
     body: JSON.stringify({
       topic: topic,
@@ -24,9 +24,6 @@ publishForm.addEventListener("submit", async function (e) {
   })
     .then(function (response) {
       return response.json();
-    })
-    .then(function (data) {
-      console.log(data);
     })
     .catch((error) => console.error("Error:", error));
 });
@@ -89,7 +86,6 @@ function connectToBroker() {
     const messageTextArea = document.querySelector("#messageSub");
     const sender = topic.split("/")[1];
     messageTextArea.value += sender + ' : ' + message + "\r\n";
-    console.log(packet)
   });
 }
 

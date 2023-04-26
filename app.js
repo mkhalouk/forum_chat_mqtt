@@ -37,8 +37,7 @@ app.use(express.urlencoded({ extended: true }));
 const homeRouter = require("./routes/home");
 const loginRouter = require("./routes/login");
 const signupRouter = require("./routes/signup");
-const subscriberRouter = require("./routes/subscriber");
-const publisherRouter = require("./routes/publisher");
+const chatRouter = require("./routes/chat");
 
 // middlewares
 // FIXME: Si pas loggué, redirige vers la page de login
@@ -74,8 +73,7 @@ app.get('/getAllUsers', userController.getAllUsers);
 app.use("/home", homeRouter);
 app.use("/login", loginRouter);
 app.use("/signup", signupRouter);
-app.use("/subscriber", subscriberRouter);
-app.use("/publisher", publisherRouter);
+app.use("/chat", chatRouter);
 
 app.listen(port, () => {
   console.log(`Forum app started at http://localhost:${port}`);

@@ -29,10 +29,6 @@ class MQTTService {
       this.mqttClient.end();
     });
 
-    // this.mqttClient.on("connect", () => {
-    //   console.log(`MQTT client connected`);
-    // });
-
     this.mqttClient.on("message", function (topic, message) {
       console.log(message.toString());
       if (this.messageCallback) this.messageCallback(topic, message);

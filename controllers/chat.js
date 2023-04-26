@@ -6,9 +6,9 @@ const MQTT_HOST = 'fce85f7acde44e06b48fc42411abf0e8.s2.eu.hivemq.cloud'; // Comp
 var mqttClient = new mqttService(MQTT_HOST);
 mqttClient.connect();
 
-exports.getPublisherPage = async function (req, res) {
+exports.getChatPage = async function (req, res) {
   try {
-    res.render("pages/publisher");
+    res.render("pages/chat");
   } catch (error) {
     return res.status(400).json({ status: 400, message: error.message });
   }
