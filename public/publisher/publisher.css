@@ -28,13 +28,15 @@
   font-weight: bold;
 }
 .form-row > input,
-.form-row > select {
+.form-row > select,
+.form-row > textarea {
   flex: 2;
 }
 
 .form-row > input,
 .form-row > button,
-.form-row > select {
+.form-row > select,
+.form-row > textarea {
   padding: 1em;
   margin: 10px 0;
   box-shadow: 0 0 15px 4px rgba(0, 0, 0, 0.06);

@@ -29,7 +29,8 @@
   window.addEventListener("load", async (event) => {
     const sessionData = await getSessionData();
     if(sessionData.user) {
-      document.getElementById("greeting").textContent += ' - ' + 'Bonjour ' + sessionData.user.username;
+      if(document.getElementById("greeting"))
+        document.getElementById("greeting").textContent += ' - ' + 'Bonjour ' + sessionData.user.username;
       document.getElementById("listLogin").remove();
       document.getElementById("listSignup").remove();
     } else {

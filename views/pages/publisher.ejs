@@ -1,25 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Publisher</title>
-    <link rel="stylesheet" href="/assets/publisher/publisher.css" />
-    <link rel="stylesheet" href="/assets/stylesheets/navbar.css" />
-  </head>
-  <body>
-    <%- include('../partials/navbar.ejs') %>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>Publisher</title>
+  <link rel="stylesheet" href="/assets/publisher/publisher.css" />
+  <link rel="stylesheet" href="/assets/stylesheets/navbar.css" />
+  <script src="https://unpkg.com/mqtt/dist/mqtt.min.js"></script>
+</head>
+
+<body>
+  <%- include('../partials/navbar.ejs') %>
     <h1>Forum Chat</h1>
     <h2>Publisher</h2>
     <div class="line"></div>
     <form method="post" action="/publish" id="publishForm">
       <ul class="wrapper">
         <li class="form-row">
-          <label for="topic">Topic</label>
+          <label for="topic">Utilisateur</label>
           <select id="topic" name="topic">
-            <option value="">Select a user</option>
+            <option value="">Selectionner un utilisateur</option>
           </select>
+        </li>
+        <li class="form-row">
+          <label for="messageSub">Discussion</label>
+          <textarea id="messageSub" name="messageSub" rows="10" readonly></textarea>
         </li>
         <li class="form-row">
           <label for="message">Message</label>
@@ -42,7 +49,19 @@
           option.text = user.username;
           topicSelect.add(option);
         });
+
+        const sessionData = await getSessionData();
+        if (sessionData.user) {
+          document.querySelector('select#topic option[value="'+sessionData.user.topic_token+'"]').remove();
+        }
       });
+
+      async function getSessionData() {
+        const response = await fetch('/getsessiondata');
+        const data = await response.json();
+        return data;
+      }
     </script>
-  </body>
+</body>
+
 </html>
